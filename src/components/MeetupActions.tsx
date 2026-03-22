@@ -286,8 +286,9 @@ export function MeetupActions({
   useEffect(() => {
     if (approveMerit.isSuccess && approveTxIdRef.current) {
       updateTransaction(approveTxIdRef.current, { status: "confirmed" });
+      refetchAllowance();
     }
-  }, [approveMerit.isSuccess, updateTransaction]);
+  }, [approveMerit.isSuccess, updateTransaction, refetchAllowance]);
 
   // Record accept bill transaction
   useEffect(() => {
@@ -340,7 +341,7 @@ export function MeetupActions({
   }, [dispute.isSuccess, updateTransaction, onSuccess]);
 
   // Allowance check for settle (debtor paying individual amount)
-  const { data: currentAllowance } = useAllowance(
+  const { data: currentAllowance, refetch: refetchAllowance } = useAllowance(
     isDebtor ? (currentUser as `0x${string}`) : undefined,
     MEETUP_MANAGER_ADDRESS
   );
