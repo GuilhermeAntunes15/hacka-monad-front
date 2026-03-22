@@ -73,13 +73,14 @@ export function MeetupActions({
 }: MeetupActionsProps) {
   const [billInput, setBillInput] = useState("");
 
+  const safeInvitees = invitees || [];
   const isCreator = currentUser.toLowerCase() === creator.toLowerCase();
-  const isInvitee = invitees.some(
+  const isInvitee = safeInvitees.some(
     (inv) => inv.toLowerCase() === currentUser.toLowerCase()
   );
   const isParticipant = isCreator || isInvitee;
 
-  const totalParticipants = invitees.length + 1; // invitees + creator
+  const totalParticipants = safeInvitees.length + 1; // invitees + creator
   const splitAmount = billAmount > 0n ? billAmount / BigInt(totalParticipants) : 0n;
 
   // Check if the current user is NOT the bill payer (i.e. needs to pay their split)

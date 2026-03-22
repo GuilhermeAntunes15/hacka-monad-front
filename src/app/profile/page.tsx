@@ -47,8 +47,10 @@ function MeetupHistoryItem({
   if (!data) return null;
 
   // getMeetup returns a tuple: [id, creator, invitees, restaurantId, status, billAmount, billPayer, createdAt, stakeAmount]
-  const [id, creator, invitees, , status, billAmount] =
-    data as [bigint, string, string[], string, number, bigint, string, bigint, bigint];
+  const rawTuple = data as [bigint, string, string[], string, number, bigint, string, bigint, bigint] | undefined;
+  if (!rawTuple) return null;
+  const [id, creator, rawInvitees, , status, billAmount] = rawTuple;
+  const invitees = rawInvitees || [];
 
   const isCreator = currentUser.toLowerCase() === creator.toLowerCase();
   const otherLabel = isCreator

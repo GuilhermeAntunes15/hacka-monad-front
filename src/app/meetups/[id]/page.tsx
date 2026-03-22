@@ -88,8 +88,16 @@ export default function MeetupDetailPage() {
   }
 
   // getMeetup returns a tuple: [id, creator, invitees, restaurantId, status, billAmount, billPayer, createdAt, stakeAmount]
-  const [id, creator, invitees, restaurantId, status, billAmount, billPayer, createdAt, stakeAmount] =
-    data as [bigint, string, string[], string, number, bigint, string, bigint, bigint];
+  const rawTuple = data as [bigint, string, string[], string, number, bigint, string, bigint, bigint] | undefined;
+  if (!rawTuple) {
+    return (
+      <div className="max-w-lg mx-auto card p-8 text-center">
+        <p className="text-error">Meetup nao encontrado.</p>
+      </div>
+    );
+  }
+  const [id, creator, rawInvitees, restaurantId, status, billAmount, billPayer, createdAt, stakeAmount] = rawTuple;
+  const invitees = rawInvitees || [];
 
   const createdDate = new Date(Number(createdAt) * 1000);
   const isCreator = address?.toLowerCase() === creator.toLowerCase();
