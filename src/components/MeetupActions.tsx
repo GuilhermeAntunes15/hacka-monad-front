@@ -111,7 +111,7 @@ export function MeetupActions({
   );
 
   // Acceptance status for current user
-  const { data: hasAccepted } = useHasAcceptedBill(
+  const { data: hasAccepted, refetch: refetchHasAccepted } = useHasAcceptedBill(
     meetupId,
     (status === 2) ? (currentUser as `0x${string}`) : undefined
   );
@@ -310,9 +310,10 @@ export function MeetupActions({
     if (accept.isSuccess && acceptTxIdRef.current) {
       updateTransaction(acceptTxIdRef.current, { status: "confirmed" });
       refetchAcceptedCount();
+      refetchHasAccepted();
       onSuccess?.();
     }
-  }, [accept.isSuccess, updateTransaction, refetchAcceptedCount, onSuccess]);
+  }, [accept.isSuccess, updateTransaction, refetchAcceptedCount, refetchHasAccepted, onSuccess]);
 
   // Record dispute bill transaction
   useEffect(() => {

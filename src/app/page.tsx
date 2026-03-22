@@ -76,7 +76,7 @@ export default function Home() {
       {!isConnected ? (
         /* CTA para conectar wallet */
         <div className="card p-8 text-center space-y-4">
-          <img src="/images/logo.png" alt="Empresta Ai" className="w-16 h-16 rounded-full mx-auto" />
+          <img src="/images/logo.png" alt="Empresta Ai" className="w-20 h-20 object-contain mx-auto" />
           <h2 className="text-xl font-semibold text-text-primary">
             Conecte sua wallet para comecar
           </h2>
