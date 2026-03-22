@@ -139,8 +139,9 @@ export function MeetupActions({
   useEffect(() => {
     if (confirm.isSuccess && confirmTxIdRef.current) {
       updateTransaction(confirmTxIdRef.current, { status: "confirmed" });
+      onSuccess?.();
     }
-  }, [confirm.isSuccess, updateTransaction]);
+  }, [confirm.isSuccess, updateTransaction, onSuccess]);
 
   // Record register bill transaction
   useEffect(() => {
@@ -163,8 +164,9 @@ export function MeetupActions({
   useEffect(() => {
     if (register.isSuccess && registerTxIdRef.current) {
       updateTransaction(registerTxIdRef.current, { status: "confirmed" });
+      onSuccess?.();
     }
-  }, [register.isSuccess, updateTransaction]);
+  }, [register.isSuccess, updateTransaction, onSuccess]);
 
   // Record settle bill transaction
   useEffect(() => {
@@ -187,8 +189,9 @@ export function MeetupActions({
   useEffect(() => {
     if (settle.isSuccess && settleTxIdRef.current) {
       updateTransaction(settleTxIdRef.current, { status: "confirmed" });
+      onSuccess?.();
     }
-  }, [settle.isSuccess, updateTransaction]);
+  }, [settle.isSuccess, updateTransaction, onSuccess]);
 
   // Record cancel transaction
   useEffect(() => {
@@ -210,8 +213,9 @@ export function MeetupActions({
   useEffect(() => {
     if (cancel.isSuccess && cancelTxIdRef.current) {
       updateTransaction(cancelTxIdRef.current, { status: "confirmed" });
+      onSuccess?.();
     }
-  }, [cancel.isSuccess, updateTransaction]);
+  }, [cancel.isSuccess, updateTransaction, onSuccess]);
 
   // Record approve transaction (for settle)
   useEffect(() => {
