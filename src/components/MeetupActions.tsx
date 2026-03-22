@@ -133,6 +133,15 @@ export function MeetupActions({
   // Individual amount as bigint for allowance/settle checks
   const myAmount = myIndividualAmount !== undefined ? (myIndividualAmount as bigint) : 0n;
 
+  // Allowance check for settle (debtor paying individual amount)
+  const { data: currentAllowance, refetch: refetchAllowance } = useAllowance(
+    isDebtor ? (currentUser as `0x${string}`) : undefined,
+    MEETUP_MANAGER_ADDRESS
+  );
+
+  const hasEnoughAllowance =
+    currentAllowance !== undefined && currentAllowance >= myAmount;
+
   // Transaction history
   const { addTransaction, updateTransaction } = useTransactionHistory();
 
@@ -339,15 +348,6 @@ export function MeetupActions({
       onSuccess?.();
     }
   }, [dispute.isSuccess, updateTransaction, onSuccess]);
-
-  // Allowance check for settle (debtor paying individual amount)
-  const { data: currentAllowance, refetch: refetchAllowance } = useAllowance(
-    isDebtor ? (currentUser as `0x${string}`) : undefined,
-    MEETUP_MANAGER_ADDRESS
-  );
-
-  const hasEnoughAllowance =
-    currentAllowance !== undefined && currentAllowance >= myAmount;
 
   // Allowance check for stake (invitee confirming with stake)
   const needsStakeApproval = status === 0 && isInvitee && !hasConfirmed && stakeAmount > 0n;
