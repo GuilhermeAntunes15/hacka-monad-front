@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+[data-theme="dark"] {
+  /* Backgrounds */
+  --color-bg: #121214;
+  --color-bg-surface: #1C1C22;
+  --color-bg-elevated: #26262E;
+
+  /* Borders */
+  --color-border: #2E2E38;
+  --color-border-light: #3A3A46;
+
+  /* Text */
+  --color-text-primary: #F0EDE8;
+  --color-text-secondary: #9B9590;
+  --color-text-muted: #5C5A65;
+
+  /* Primary (gold) */
+  --color-primary: #E8A317;
+  --color-primary-hover: #C4880D;
+  --color-primary-light: #F5C563;
+
+  /* Secondary (violet) */
+  --color-secondary: #6C5CE7;
+  --color-secondary-hover: #5A4BD1;
+  --color-secondary-light: #8B7EF0;
+
+  /* Semantic */
+  --color-success: #36D399;
+  --color-error: #F87272;
+  --color-warning: #FBBD23;
+
+  /* Shadows */
+  --shadow-glow-gold: 0 0 20px rgba(232, 163, 23, 0.10);
+  --shadow-glow-violet: 0 0 20px rgba(108, 92, 231, 0.10);
+
+  /* Card hover glow */
+  --card-hover-shadow: 0 0 30px rgba(232, 163, 23, 0.06);
+
+  /* Noise opacity */
+  --noise-opacity: 0.025;
+
+  /* Scrollbar */
+  --scrollbar-track: #1C1C22;
+  --scrollbar-thumb: #3A3A46;
+  --scrollbar-thumb-hover: #4A4A56;
+
+  /* Secondary alpha for hover backgrounds */
+  --color-secondary-alpha: rgba(108, 92, 231, 0.08);
+
+  /* Primary alpha for badges */
+  --color-primary-alpha: rgba(232, 163, 23, 0.10);
+
+  /* Selection */
+  --color-selection: rgba(232, 163, 23, 0.25);
+}
+
+[data-theme="light"] {
+  /* Backgrounds */
+  --color-bg: #F5F3EF;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-elevated: #FAFAF8;
+
+  /* Borders */
+  --color-border: #E0DDD8;
+  --color-border-light: #D0CCC6;
+
+  /* Text */
+  --color-text-primary: #1A1A1E;
+  --color-text-secondary: #5C5A55;
+  --color-text-muted: #9B9590;
+
+  /* Primary (gold - slightly darker for light bg) */
+  --color-primary: #C4880D;
+  --color-primary-hover: #A87209;
+  --color-primary-light: #E8A317;
+
+  /* Secondary (violet - slightly darker for light bg) */
+  --color-secondary: #5A4BD1;
+  --color-secondary-hover: #4A3BB8;
+  --color-secondary-light: #6C5CE7;
+
+  /* Semantic */
+  --color-success: #22A06B;
+  --color-error: #E53935;
+  --color-warning: #E6A200;
+
+  /* Shadows */
+  --shadow-glow-gold: 0 0 20px rgba(232, 163, 23, 0.08);
+  --shadow-glow-violet: 0 0 20px rgba(108, 92, 231, 0.08);
+
+  /* Card hover glow */
+  --card-hover-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+
+  /* Noise opacity */
+  --noise-opacity: 0;
+
+  /* Scrollbar */
+  --scrollbar-track: #E8E5E0;
+  --scrollbar-thumb: #C8C4BE;
+  --scrollbar-thumb-hover: #A8A4A0;
+
+  /* Secondary alpha for hover backgrounds */
+  --color-secondary-alpha: rgba(90, 75, 209, 0.08);
+
+  /* Primary alpha for badges */
+  --color-primary-alpha: rgba(196, 136, 13, 0.12);
+
+  /* Selection */
+  --color-selection: rgba(196, 136, 13, 0.25);
+}
+
+/* -- Base ---------------------------------------- */
+
+body {
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Noise texture — quebra a "limpeza" artificial */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* -- Typography ---------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* Valores numericos com tabular nums */
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* -- Utility classes ----------------------------- */
+
+.card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--color-border-light);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.625rem 1.25rem;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-secondary);
+  font-weight: 600;
+  border: 1px solid var(--color-secondary);
+  border-radius: 8px;
+  padding: 0.625rem 1.25rem;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--color-secondary-alpha);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* Badge de MeritCoin */
+.badge-merit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: var(--color-primary-alpha);
+  color: var(--color-primary-light);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+/* Gradient premium — usar apenas em elementos especiais */
+.gradient-merit {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+}
+
+/* -- Scrollbar ----------------------------------- */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* -- Selection ----------------------------------- */
+
+::selection {
+  background: var(--color-selection);
+  color: var(--color-text-primary);
+}
