@@ -29,11 +29,9 @@ export function Header() {
         <div className="flex items-center gap-6">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full gradient-merit flex items-center justify-center">
-              <span className="text-bg font-bold text-sm">M</span>
-            </div>
+            <img src="/images/logo.png" alt="Empresta Ai" className="w-8 h-8 rounded-full" />
             <span className="text-xl font-bold tracking-tight text-text-primary">
-              Merit<span className="text-primary">Coin</span>
+              Empresta <span className="text-primary">Ai</span>
             </span>
           </Link>
 

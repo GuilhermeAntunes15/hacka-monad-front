@@ -63,27 +63,25 @@ export default function Home() {
       {/* Hero */}
       <div className="text-center space-y-3 py-6">
         <h1 className="text-5xl font-bold tracking-tight">
-          Merit<span className="text-primary">Coin</span>
+          Empresta <span className="text-primary">Ai</span>
         </h1>
         <p className="text-text-secondary text-lg max-w-lg mx-auto">
           Encontros crypto. Contas divididas. Reputacao on-chain.
         </p>
         <p className="text-text-muted text-sm">
-          Conecte-se com entusiastas crypto, descubra restaurantes e divida contas com MeritCoins na Monad.
+          Conecte-se com amigos, descubra restaurantes e divida contas de forma justa com MERIT na Monad.
         </p>
       </div>
 
       {!isConnected ? (
         /* CTA para conectar wallet */
         <div className="card p-8 text-center space-y-4">
-          <div className="w-16 h-16 rounded-full gradient-merit flex items-center justify-center mx-auto">
-            <span className="text-bg font-bold text-2xl">M</span>
-          </div>
+          <img src="/images/logo.png" alt="Empresta Ai" className="w-16 h-16 rounded-full mx-auto" />
           <h2 className="text-xl font-semibold text-text-primary">
             Conecte sua wallet para comecar
           </h2>
           <p className="text-text-secondary text-sm max-w-md mx-auto">
-            Voce precisa de uma wallet compativel com a Monad Testnet para usar o MeritCoin.
+            Voce precisa de uma wallet compativel com a Monad Testnet para usar o Empresta Ai.
           </p>
           <div className="flex justify-center">
             <ConnectButton />

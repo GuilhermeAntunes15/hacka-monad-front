@@ -66,16 +66,64 @@ export function useRegisterBill() {
   const { isLoading: isConfirming, isSuccess } =
     useWaitForTransactionReceipt({ hash });
 
-  function registerBill(meetupId: bigint, amount: bigint) {
+  function registerBill(meetupId: bigint, totalAmount: bigint, amounts: bigint[]) {
     writeContract({
       address: MEETUP_MANAGER_ADDRESS,
       abi: MEETUP_MANAGER_ABI,
       functionName: "registerBill",
-      args: [meetupId, amount],
+      args: [meetupId, totalAmount, amounts],
     });
   }
 
   return { registerBill, hash, isPending, isConfirming, isSuccess, error, reset };
+}
+
+export function useAcceptBill() {
+  const {
+    writeContract,
+    data: hash,
+    isPending,
+    error,
+    reset,
+  } = useWriteContract();
+
+  const { isLoading: isConfirming, isSuccess } =
+    useWaitForTransactionReceipt({ hash });
+
+  function acceptBill(meetupId: bigint) {
+    writeContract({
+      address: MEETUP_MANAGER_ADDRESS,
+      abi: MEETUP_MANAGER_ABI,
+      functionName: "acceptBill",
+      args: [meetupId],
+    });
+  }
+
+  return { acceptBill, hash, isPending, isConfirming, isSuccess, error, reset };
+}
+
+export function useDisputeBill() {
+  const {
+    writeContract,
+    data: hash,
+    isPending,
+    error,
+    reset,
+  } = useWriteContract();
+
+  const { isLoading: isConfirming, isSuccess } =
+    useWaitForTransactionReceipt({ hash });
+
+  function disputeBill(meetupId: bigint) {
+    writeContract({
+      address: MEETUP_MANAGER_ADDRESS,
+      abi: MEETUP_MANAGER_ABI,
+      functionName: "disputeBill",
+      args: [meetupId],
+    });
+  }
+
+  return { disputeBill, hash, isPending, isConfirming, isSuccess, error, reset };
 }
 
 export function useSettleBill() {
@@ -189,5 +237,50 @@ export function useGetStakeStatus(
         : undefined,
     chainId: monadTestnet.id,
     query: { enabled: meetupId !== undefined && !!participant, staleTime: 15_000 },
+  });
+}
+
+export function useGetIndividualAmount(
+  meetupId: bigint | undefined,
+  participantAddress: `0x${string}` | undefined
+) {
+  return useReadContract({
+    address: MEETUP_MANAGER_ADDRESS,
+    abi: MEETUP_MANAGER_ABI,
+    functionName: "getIndividualAmount",
+    args:
+      meetupId !== undefined && participantAddress
+        ? [meetupId, participantAddress]
+        : undefined,
+    chainId: monadTestnet.id,
+    query: { enabled: meetupId !== undefined && !!participantAddress, staleTime: 15_000 },
+  });
+}
+
+export function useHasAcceptedBill(
+  meetupId: bigint | undefined,
+  participantAddress: `0x${string}` | undefined
+) {
+  return useReadContract({
+    address: MEETUP_MANAGER_ADDRESS,
+    abi: MEETUP_MANAGER_ABI,
+    functionName: "hasAccepted",
+    args:
+      meetupId !== undefined && participantAddress
+        ? [meetupId, participantAddress]
+        : undefined,
+    chainId: monadTestnet.id,
+    query: { enabled: meetupId !== undefined && !!participantAddress, staleTime: 10_000 },
+  });
+}
+
+export function useGetAcceptedCount(meetupId: bigint | undefined) {
+  return useReadContract({
+    address: MEETUP_MANAGER_ADDRESS,
+    abi: MEETUP_MANAGER_ABI,
+    functionName: "getAcceptedCount",
+    args: meetupId !== undefined ? [meetupId] : undefined,
+    chainId: monadTestnet.id,
+    query: { enabled: meetupId !== undefined, staleTime: 10_000 },
   });
 }
