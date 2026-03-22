@@ -28,7 +28,7 @@ const STEPS: StepConfig[] = [
   },
   {
     title: "Resgate seus MeritCoins",
-    description: "Resgate 100 MERIT gratuitos do faucet para comecar",
+    description: "Resgate 500 MERIT gratuitos do faucet para comecar",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -236,7 +236,7 @@ export function OnboardingTutorial() {
                                 ? "Confirme na wallet..."
                                 : isFaucetConfirming
                                 ? "Confirmando..."
-                                : "Resgatar 100 MERIT"}
+                                : "Resgatar 500 MERIT"}
                             </button>
                             {faucetHash && (
                               <a

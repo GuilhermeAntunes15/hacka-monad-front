@@ -43,8 +43,8 @@ export default function Home() {
         type: "faucet",
         hash: faucetHash,
         timestamp: Date.now(),
-        details: "Resgatou 100 MERIT do faucet",
-        amount: "100 MERIT",
+        details: "Resgatou 500 MERIT do faucet",
+        amount: "500 MERIT",
         status: "pending",
       });
     }
@@ -118,7 +118,7 @@ export default function Home() {
             {!isClaimedLoading && !hasClaimed && (
               <div className="bg-bg rounded-card p-4 space-y-3">
                 <p className="text-sm text-text-secondary">
-                  Voce ainda nao recebeu seus MeritCoins iniciais. Resgate 100 MERIT do faucet!
+                  Voce ainda nao recebeu seus MeritCoins iniciais. Resgate 500 MERIT do faucet!
                 </p>
                 <button
                   onClick={() => claim()}
@@ -129,7 +129,7 @@ export default function Home() {
                     ? "Confirme na wallet..."
                     : isFaucetConfirming
                     ? "Confirmando (~400ms)..."
-                    : "Resgatar 100 MERIT"}
+                    : "Resgatar 500 MERIT"}
                 </button>
                 {faucetHash && (
                   <div className="text-sm space-y-1">

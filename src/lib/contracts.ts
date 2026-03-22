@@ -68,6 +68,13 @@ export const MERITCOIN_ABI = [
   },
   {
     type: "function",
+    name: "requestMore",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "hasClaimedFaucet",
     inputs: [{ name: "user", type: "address", internalType: "address" }],
     outputs: [{ name: "", type: "bool", internalType: "bool" }],

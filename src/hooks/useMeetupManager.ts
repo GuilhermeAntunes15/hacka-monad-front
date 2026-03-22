@@ -132,6 +132,7 @@ export function useMeetupCount() {
     abi: MEETUP_MANAGER_ABI,
     functionName: "meetupCount",
     chainId: monadTestnet.id,
+    query: { staleTime: 30_000 },
   });
 }
 
@@ -142,7 +143,7 @@ export function useGetMeetup(meetupId: bigint | undefined) {
     functionName: "getMeetup",
     args: meetupId !== undefined ? [meetupId] : undefined,
     chainId: monadTestnet.id,
-    query: { enabled: meetupId !== undefined },
+    query: { enabled: meetupId !== undefined, staleTime: 10_000 },
   });
 }
 
@@ -153,7 +154,7 @@ export function useGetUserMeetups(address: `0x${string}` | undefined) {
     functionName: "getUserMeetups",
     args: address ? [address] : undefined,
     chainId: monadTestnet.id,
-    query: { enabled: !!address },
+    query: { enabled: !!address, staleTime: 15_000 },
   });
 }
 
@@ -170,7 +171,7 @@ export function useGetConfirmationStatus(
         ? [meetupId, inviteeAddress]
         : undefined,
     chainId: monadTestnet.id,
-    query: { enabled: meetupId !== undefined && !!inviteeAddress },
+    query: { enabled: meetupId !== undefined && !!inviteeAddress, staleTime: 15_000 },
   });
 }
 
@@ -187,6 +188,6 @@ export function useGetStakeStatus(
         ? [meetupId, participant as `0x${string}`]
         : undefined,
     chainId: monadTestnet.id,
-    query: { enabled: meetupId !== undefined && !!participant },
+    query: { enabled: meetupId !== undefined && !!participant, staleTime: 15_000 },
   });
 }
